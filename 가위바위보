@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define _CRT_SCURE_NO_WARNING_
+int main(void)
+{
+    srand(time(NULL));
+
+    while (true)
+    {
+        int player, computer;
+        {
+            printf("가위바위보 게임\n");
+            printf("바위=1,가위=2,보=3\n");
+        }
+        {
+            printf("숫자를 입력하세요.\n");
+            scanf("%d", &player);
+            {
+                printf("내가 낸 것\n");
+            }
+            if (player == 1)
+            {
+                printf("바위를 냈습니다.\n");
+            }
+            else if (player == 2)
+            {
+                printf("가위를 냈습니다.\n");
+            }
+            else if (player == 3)
+            {
+                printf("보를 냈습니다.\n");
+            }
+        }
+
+        {
+            computer = rand() % ((3 - 1) + 1) + 1;
+        }
+        {
+            printf("컴퓨터가 낸 것\n");
+        }
+        if (computer == 1)
+        {
+            printf("바위\n");
+        }
+        else if (computer == 2)
+        {
+            printf("가위\n");
+        }
+        else if (computer == 3)
+        {
+            printf("보\n");
+        }
+        {
+            printf("-결과-\n");
+        }
+        if (player == computer)
+        {
+            printf("비겼습니다.\n");
+        }
+        else if (player == 1 && computer == 2 || player == 2 && computer == 3 || player == 3 && computer == 1)
+        {
+            printf("컴퓨터에게 이겼습니다!\n");
+        }
+        else
+        {
+            printf("당신은 졌습니다...\n");
+        }
+        {
+            printf("게임 끝");
+        }
+    }
+
+    return 0;
+}
