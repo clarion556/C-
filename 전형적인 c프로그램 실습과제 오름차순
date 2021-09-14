@@ -1,0 +1,43 @@
+#include <stdio.h>
+#define SIZE 4
+typedef struct
+{
+	char name[10];
+	double w;
+}WEIGHT;
+
+void swap(WEIGHT*, WEIGHT*);
+int main(void)
+{
+	WEIGHT man[SIZE] = { {"한개발",57.5},
+					     {"엄청군",125.6},
+					     {"갈비양",35.7},
+					     {"망한조",70.1} };
+
+	int i, j;
+	for (i = 0; i < 3; i++)
+	{
+		for (j = i + 1; j < 4; j++)
+		{
+			if (man[i].w > man[j].w)
+			{
+				swap(&man[i], &man[j]);
+			}
+		}
+	}
+	{
+		printf("  이름/t체중\n");
+		for (i = 0; i < 4; i++)
+		{
+			printf("  %s  %5.lf\n", man[i].name, man[i].w);
+		}
+	}
+	return 0;
+}
+void swap(WEIGHT* mani, WEIGHT* manj)
+{
+	WEIGHT temp;
+	temp = *mani;
+	*mani = *manj;
+	*manj = temp;
+}
