@@ -1,0 +1,259 @@
+C++강의 요약
+정수를 다루기 위한 클래스 integer
+class Integer	Integer라는 이름의 calss
+{
+      private:	속성
+	int val;	멤버변수, private 속성
+      public:	이 줄 이하는 public속성
+	int getVal();    멤버함수, 출력, getter
+	int setVal();     멤버함수 ,입력, setter
+}Val;	객체 만드는 첫번째 방법
+Integer Val2; 객체 만드는 2번째 방법(이거를 씀)
+
+
+클래스 멤버 접근 권한 : private (프라이벳)
+
+자료를 외부로부터 은폐해서 잘모소딘 조작이나 사용에서 보호받는 방법제공
+(캡슐화)
+
+private 멤버는 클래스 외부에서 접근불가 (정보를 숨김)
+멤버 변수는 주로 private로 선언
+생략할 수 있지만 (멤버의 액세스 권한이 없으면 private를 쓴다?)
+해당 클래스의 멤버함수만이 접근 가능하다.
+
+class Dog
+{
+       private:	속성,생략이 가능함
+	int age;	멤버 변수
+       public:
+	int getAge();	멤버함수
+};
+Dog	coco;	객체
+
+범용 클래스 멤버 접근
+멤버 함수는 주로 public 로 선언한다
+age 값에 접근하려면 getAge() 함수를 통해야 한다.
+
+
+
+보호 protected
+동일한 클래스의 멤버함수와 현재 클래스를 상속받아서 생성된 자식
+클래스의 멤버함수만이 직접 접근 가능하다
+자신과 자식만 접근이 가능
+상속하지 않으면 private 속성과 같다
+
+
+
+함수를 쓸때
+선언
+정의
+호출 순서로 쓴다.
+
+void display(void);	세미콜론 붙으면 선언
+
+void display(void)		함수 정의
+{
+	printf("하이");
+}
+
+display();		함수 호출
+
+
+
+return문
+
+결과 값을 호출한 함수로 반환한다.
+return문을 만나면 함수 나머지 부분에 상관없이 함수 실행을 종료하고
+호출한 함수로 넘어간다
+
+return(수식이나 값을 쓴다);	세미콜론도 붙인다
+return 다음 괄호는 생략이 된다.
+예)
+return 1;
+return x;
+return (x+y);
+
+매개 변수들은 콤마로 구분하고 각각 자료형도 함께 써야한다.
+
+
+문자열
+const char* 대신에 string 쓸수있다.
+using namespace std; 도 잊지말자.
+using namespace 가 없다면
+std::string 써주면 된다.
+
+
+범위 지정 연산자 ::
+전역변수 지역변수가 동시에 쓰이면 지역변수가 우선이다.
+
+int a=3;
+int main()
+{
+	int a=10;
+	a=a+10;  cout<<a<<",";    //a, 20
+	::a=::a+3cout<<::a;    //전역변수 a를 사용함 a,6
+	return 0;
+}
+
+
+namespace
+모든 식별자가 유일하도록 보장하는 코드영역을 정의함
+
+using namespace std;
+std 네임스페이스의 모든것을 사용한다는 것
+//네임 스페이스로 std 사용, 좋은 방법이 아님
+
+using std::cout;
+using std::endl;
+이런식으로 하나씩 쓸것만 해주는게 좋다.
+
+헤더파일을 만들어서 멤버함수를 만든다.
+namespace AA
+{
+	int
+	add( int x , int y
+    {
+	return
+	x + y
+    }
+}
+를 메인 소스에 사용을 한다.
+쓰려면 std::AA
+
+inline 함수
+최적화 함수이다.
+inline를 int 앞에 써주면 왔다갔다 하지않고 
+바로 실행 하지만 여러번 실행 하게되면 용량은 커진다.
+요령껏 쓰는 함수다.
+요약 끝
+
+함수 만들기(1)
+#include <iostream>
+void display()
+{
+	std::cout << "hello";
+}
+int main()
+{
+	display();
+	return 0;
+}
+
+범위 지정 연산자
+#include <iostream>
+
+int a = 3;
+int main()
+{
+	int a = 10;
+	a = a + 10; std::cout << a << std::endl; //a=20
+	::a = ::a + 3; std::cout << ::a;    //전역변수 a를 사용함 a=6
+	return 0;
+}
+
+멤버 함수를 클래스 외부에서 정의
+#include <iostream>
+using std::cout;
+class Dog
+{
+private:
+	int age;
+public:
+	int getAge();
+	void setAge(int a);
+};
+
+int Dog::getAge()		// Dog:: 얘는 겟에이지가 도그 클래스 라는것을 명시한다.
+{
+	return age;
+}
+
+void Dog::setAge(int a)
+{
+	age = a;
+}
+
+int main()
+{
+	Dog coco;
+	coco.setAge(3);
+	std::cout << coco.getAge();
+	return 0;
+}
+
+실습3-1 inline 함수 예
+#include <iostream>
+using std::cout
+#define sum(i, j) (i + j) //매크로함수
+inline int iSum(int i, int j) //inline 함수
+{
+    return i + j;
+}
+int add(int i, int j) //일반 함수
+{
+    return i + j;
+}
+int main()
+{
+    cout << sum(10, 20) / 2 << ",";	//매크로함수의 부작용
+    cout << iSum(10, 20) / 2 << ",";
+    cout << add(10, 20) / 2;
+    return 0;
+}
+과제
+사람 클래스를 선언하고 자신 객체를 정의하여 자신의 이름, 나이, 몸무게를 출력하는 프로그램
+#include <iostream>
+
+using namespace std;
+
+class Man
+{
+private:
+	string name;
+	int age;
+	double weight;
+public:
+	string getName()
+	{
+		return name;
+	}
+	void setName(string a)
+	{
+		name = a;
+	}
+	int getAge()
+	{
+		return age;
+	}
+	void setAge(int a)
+	{
+		age = a;
+	}
+	double getWeight()
+	{
+		return weight;
+	}
+	void setWeight(double a)
+	{
+		weight = a;
+	}
+};
+
+
+int main()
+{
+	Man jogyuseong;
+	jogyuseong.setName("조규성");
+	jogyuseong.setAge(20);
+	cout <<"이름 :" <<jogyuseong.getName() <<endl;
+	cout <<"나이 :" <<jogyuseong.getAge() << endl;
+	jogyuseong.setWeight(70.3);
+	cout <<"몸무게 :" << jogyuseong.getWeight() << endl;
+	
+	return 0;
+}
+/*
+이름 :조규성
+나이 :20
+몸무게 :70.3
+*/
